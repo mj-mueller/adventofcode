@@ -2,5 +2,7 @@
 gradle/
 build/
 .idea/
+logs/
 gradlew
 gradlew.bat
+app.log
