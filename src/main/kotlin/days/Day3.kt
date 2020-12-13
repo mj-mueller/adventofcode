@@ -2,7 +2,7 @@ package days
 
 import kotlin.math.max
 
-class Day3(private val input: List<String>) {
+class Day3(filename: String): Day(filename) {
 
     private val decompose: Regex = """^([0-9]+)-([0-9]+) ([a-z]): (.*)$""".toRegex()
 

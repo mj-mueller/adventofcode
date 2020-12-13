@@ -7,13 +7,13 @@ import java.io.File
 internal class Day3Test{
     @Test
     fun testSample(){
-        val day3 = Day3(File("./src/main/resources/days/day3_sample.txt").readLines())
+        val day3 = Day3("./src/main/resources/days/day3_sample.txt")
         assertEquals(7, day3.part1())
     }
 
     @Test
     fun testStepFunction(){
-        val day3 = Day3(File("./src/main/resources/days/day3_sample.txt").readLines())
+        val day3 = Day3("./src/main/resources/days/day3_sample.txt")
         assertEquals(0, day3.calulatePos(0){ 4})
         assertEquals(1, day3.calulatePos(1) { it + 1})
         assertEquals(3, day3.calulatePos(3) { it + 1})
