@@ -1,31 +1,47 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.10"
+    kotlin("jvm") version "1.4.21"
+    id("org.jetbrains.dokka") version "1.4.20"
     application
     idea
     id("io.snyk.gradle.plugin.snykplugin") version "0.4"
 }
 
 group = "Mo"
-version = "1.0-SNAPSHOT"
+version = "0.1-SNAPSHOT"
+
+// Versions
+val log4jVersion = "2.14.0"
+val jUnitVersion = "5.7.0"
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
     implementation("org.apache.logging.log4j:log4j-api-kotlin:1.0.0")
-    implementation("org.apache.logging.log4j:log4j-api:2.11.1")
-    implementation("org.apache.logging.log4j:log4j-core:2.11.1")
-    implementation("org.junit.jupiter:junit-jupiter:5.4.2")
-    implementation("org.junit.jupiter:junit-jupiter:5.4.2")
+    implementation("org.apache.logging.log4j:log4j-api:$log4jVersion")
+    implementation("org.apache.logging.log4j:log4j-core:$log4jVersion")
+    implementation("org.junit.jupiter:junit-jupiter:$jUnitVersion")
+    implementation("org.junit.jupiter:junit-jupiter:$jUnitVersion")
     testImplementation(kotlin("test-junit"))
+//    testImplementation("io.mockk:mockk-dsl-jvm:1.10.3-jdk8")
 }
 
 tasks.wrapper() {
     gradleVersion = "6.7.1"
     distributionType = Wrapper.DistributionType.ALL
+}
+
+idea {
+    module {
+        // Download sources and javadoc
+        isDownloadJavadoc = true
+        isDownloadSources = true
+        excludeDirs = setOf(".gradle", ".idea", "build").map { file(it) }.toSet()
+    }
 }
 
 tasks.test {
