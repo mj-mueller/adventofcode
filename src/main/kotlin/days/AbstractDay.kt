@@ -4,7 +4,7 @@ import org.apache.logging.log4j.kotlin.Logging
 import java.io.File
 
 abstract class AbstractDay(filename: String): Logging {
-    private val input: String = File(filename).readText()
+    val input: String = File(filename).readText()
 
     fun inputAsLines(): List<String> = input.lines()
 
