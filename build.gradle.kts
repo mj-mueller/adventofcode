@@ -21,6 +21,11 @@ dependencies {
     testImplementation(kotlin("test-junit"))
 }
 
+tasks.wrapper() {
+    gradleVersion = "6.7.1"
+    distributionType = Wrapper.DistributionType.ALL
+}
+
 tasks.test {
     useJUnitPlatform()
 }
