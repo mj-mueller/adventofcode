@@ -15,6 +15,9 @@ version = "0.4-SNAPSHOT"
 val log4jVersion = "2.14.0"
 val jUnitVersion = "5.7.0"
 
+// Load API token from user folder
+val snykAPIToken: String by project
+
 repositories {
     mavenCentral()
     jcenter()
@@ -59,6 +62,6 @@ application {
 snyk {
     setAutoDownload(true)
     setAutoUpdate(false)
-//    setApi()
+    setApi(snykAPIToken)
     setSeverity("low")
 }
