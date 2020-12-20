@@ -1,9 +1,10 @@
 .gradle/
-gradle/
 build/
 .idea/
 logs/
-gradlew
-gradlew.bat
 app.log
 **/log4j2.xml
+*.iml
+*.ipr
+*.iws
+snyk
