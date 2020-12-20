@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.4.10"
     application
+    idea
+    id("io.snyk.gradle.plugin.snykplugin") version "0.4"
 }
 
 group = "Mo"
@@ -36,4 +38,11 @@ tasks.withType<KotlinCompile>() {
 
 application {
     mainClass.set("MainKt")
+}
+
+snyk {
+    setAutoDownload(true)
+    setAutoUpdate(false)
+//    setApi()
+    setSeverity("low")
 }
