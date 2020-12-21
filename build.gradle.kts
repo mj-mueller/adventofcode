@@ -8,6 +8,8 @@ plugins {
     id("org.jetbrains.dokka") version "1.4.20"
     id("io.snyk.gradle.plugin.snykplugin") version "0.4"
     id("com.dorongold.task-tree") version "1.5"
+    // For code coverage transmit from Travis
+    id("com.github.nbaztec.coveralls-jacoco") version "1.2.4"
 }
 
 group = "Mo"
@@ -25,6 +27,14 @@ val snykAPITokenFromEnv: String? = System.getenv("SNYK_API_TOKEN")
 repositories {
     mavenCentral()
     jcenter()
+}
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+    }
 }
 
 dependencies {
@@ -57,7 +67,7 @@ tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
     reports {
         html.isEnabled = true
-        xml.isEnabled = false
+        xml.isEnabled = true
         csv.isEnabled = false
         html.destination = file("${buildDir}/jacocoHtml")
     }
