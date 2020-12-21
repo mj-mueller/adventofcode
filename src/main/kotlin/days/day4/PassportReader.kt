@@ -2,7 +2,7 @@ package days.day4
 
 import org.apache.logging.log4j.kotlin.Logging
 
-class PassportReader(input: String) : Logging {
+class PassportReader(passportStrings: List<String>) : Logging {
     val parsePassportsRegex: Regex = """
         (?<=^|\n\n) # Lookbehind for start of string or empty line
         (.+?) # Lazy match passport key value pairs
@@ -16,21 +16,10 @@ class PassportReader(input: String) : Logging {
         ([^\s]+):([^\s]+) # Key value pair
         )""".toRegex(setOf(RegexOption.COMMENTS))
 
-    val passports: List<Map<String, String>>
+    val passports: List<Map<String, String>>   = parsePassports(passportStrings)
 
-    init {
-        passports = parsePassports(input)
-        logger.trace("Parsed passports:\n$passports")
-    }
-
-    private fun parsePassports(input: String): List<Map<String, String>> {
-        val passportStrings: List<String> = separateDelimiteredPassports(input)
+    private fun parsePassports(passportStrings: List<String>): List<Map<String, String>> {
         return passportStrings.map { passportStringToMap(it) }.toList()
-    }
-
-    private fun separateDelimiteredPassports(inputString: String): List<String> {
-        return parsePassportsRegex.findAll(inputString).map { it.value }.toList()
-
     }
 
     private fun passportStringToMap(passportString: String): Map<String, String> {
