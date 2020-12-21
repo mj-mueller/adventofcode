@@ -6,6 +6,7 @@ plugins {
     application
     idea
     id("io.snyk.gradle.plugin.snykplugin") version "0.4"
+    id("com.dorongold.task-tree") version "1.5"
 }
 
 group = "Mo"
@@ -15,8 +16,10 @@ version = "0.4-SNAPSHOT"
 val log4jVersion = "2.14.0"
 val jUnitVersion = "5.7.0"
 
-// Load API token from user folder
-val snykAPIToken: String by project
+// Load API token from user folder. Fallback to env for travis. There should be a combined way for this.
+val snykAPITokenFromProperty: String? by project
+val snykAPITokenFromEnv: String? = System.getenv("SNYK_API_TOKEN")
+
 
 repositories {
     mavenCentral()
@@ -28,9 +31,6 @@ dependencies {
     implementation("org.apache.logging.log4j:log4j-api:$log4jVersion")
     implementation("org.apache.logging.log4j:log4j-core:$log4jVersion")
     implementation("org.junit.jupiter:junit-jupiter:$jUnitVersion")
-    implementation("org.junit.jupiter:junit-jupiter:$jUnitVersion")
-    testImplementation(kotlin("test-junit"))
-//    testImplementation("io.mockk:mockk-dsl-jvm:1.10.3-jdk8")
 }
 
 tasks.wrapper {
@@ -62,6 +62,6 @@ application {
 snyk {
     setAutoDownload(true)
     setAutoUpdate(false)
-    setApi(snykAPIToken)
+    setApi(snykAPITokenFromProperty ?: snykAPITokenFromEnv)
     setSeverity("low")
 }
