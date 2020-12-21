@@ -1,0 +1,5 @@
+repos:
+  -   repo: https://github.com/mj-mueller/adventofcode
+      rev: gb6c
+      hooks:
+        -   id: trailing-whitespace
