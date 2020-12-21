@@ -1,10 +1,10 @@
 package days
 
+import days.utils.ResourcesRequester
 import org.apache.logging.log4j.kotlin.Logging
-import java.io.File
 
 abstract class AbstractDay(filename: String) : Logging {
-    val input: String = File(filename).readText()
+    val input: String = ResourcesRequester.getResource(filename).readText()
 
     fun inputAsLines(): List<String> = input.lines()
 

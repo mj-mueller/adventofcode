@@ -1,19 +1,20 @@
 package days
 
 import days.day3.Slope
+import days.utils.ResourcesRequester
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class Day3Test {
     @Test
     fun testSample() {
-        val day3 = Day3("./src/test/resources/input/day3_sample.txt")
+        val day3 = Day3(ResourcesRequester.DAY_INPUT_PATH + "day3_sample.txt")
         assertEquals(7, day3.part1())
     }
 
     @Test
     fun testSampleForPart2() {
-        val day3 = Day3("./src/test/resources/input/day3_sample.txt")
+        val day3 = Day3(ResourcesRequester.DAY_INPUT_PATH + "day3_sample.txt")
         val slope = Slope(day3.inputAsLines())
 
         assertEquals(2, slope.treesOnSlideTrack(1, 1))
