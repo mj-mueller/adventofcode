@@ -1,8 +1,7 @@
 package days
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import java.io.File
 
 internal class Day2Test {
     @Test

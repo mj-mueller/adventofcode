@@ -20,7 +20,7 @@ class PassportReader(input: String) : Logging {
 
     init {
         passports = parsePassports(input)
-        logger.trace("Parsed passports:\n${passports.toString()}")
+        logger.trace("Parsed passports:\n$passports")
     }
 
     private fun parsePassports(input: String): List<Map<String, String>> {

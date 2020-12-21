@@ -2,10 +2,8 @@ import days.Day1
 import days.Day2
 import days.Day3
 import days.Day4
-import org.apache.logging.log4j.kotlin.Logging
-import java.io.File
 
-fun main(){
+fun main() {
     val resources = "./src/main/resources/input/"
     val day1 = Day1(resources + "day1.txt")
     day1.printResults()

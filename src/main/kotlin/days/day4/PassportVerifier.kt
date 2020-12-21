@@ -10,10 +10,10 @@ interface PassportVerifier {
     /**
      * Defines mandatory fields for passport verification.
      */
-    var mandatoryFields : Set<String>
+    var mandatoryFields: Set<String>
 
     /**
      * Defines regex that need to match for specified passport fields (keys in map).
      */
-    var fieldRegexRules : Map<String, Regex>
+    var fieldRegexRules: Map<String, Regex>
 }

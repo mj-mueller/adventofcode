@@ -3,7 +3,7 @@ package days
 import org.apache.logging.log4j.kotlin.Logging
 import java.io.File
 
-abstract class AbstractDay(filename: String): Logging {
+abstract class AbstractDay(filename: String) : Logging {
     val input: String = File(filename).readText()
 
     fun inputAsLines(): List<String> = input.lines()

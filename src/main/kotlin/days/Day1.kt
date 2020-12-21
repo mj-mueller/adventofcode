@@ -1,7 +1,5 @@
 package days
 
-import java.lang.IllegalArgumentException
-
 class Day1(filename: String) : AbstractDay(filename) {
     override fun part1(): Int {
         val lines = inputAsIntLines()

@@ -2,7 +2,6 @@ package days.day3
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import java.lang.IllegalStateException
 
 internal class SlopeTest {
     private val emptyField: List<String> = emptyList()

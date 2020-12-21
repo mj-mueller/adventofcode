@@ -1,7 +1,6 @@
 package days
 
 import days.day3.Slope
-import java.lang.IllegalArgumentException
 
 class Day3(filename: String) : AbstractDay(filename) {
     private val decompose: Regex = """^([0-9]+)-([0-9]+) ([a-z]): (.*)$""".toRegex()
@@ -26,5 +25,4 @@ class Day3(filename: String) : AbstractDay(filename) {
             acc * current
         }
     }
-
 }

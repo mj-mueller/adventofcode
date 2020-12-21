@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "Mo"
-version = "0.1-SNAPSHOT"
+version = "0.4-SNAPSHOT"
 
 // Versions
 val log4jVersion = "2.14.0"
@@ -30,7 +30,7 @@ dependencies {
 //    testImplementation("io.mockk:mockk-dsl-jvm:1.10.3-jdk8")
 }
 
-tasks.wrapper() {
+tasks.wrapper {
     gradleVersion = "6.7.1"
     distributionType = Wrapper.DistributionType.ALL
 }
@@ -48,7 +48,7 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.withType<KotlinCompile>() {
+tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 
