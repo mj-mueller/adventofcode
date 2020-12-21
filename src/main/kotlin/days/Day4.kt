@@ -8,7 +8,7 @@ class Day4(filename: String) : AbstractDay(filename) {
 
     override fun part1(): Int {
         val mandatoryFields = setOf("hcl", "ecl", "pid", "eyr", "byr", "iyr", "hgt")
-        val reader = PassportReader(input)
+        val reader = PassportReader(emptyLineSeparatedStrings())
         val verifier: PassportVerifier = PassportVerifierImpl()
         verifier.mandatoryFields = mandatoryFields
 
@@ -18,7 +18,7 @@ class Day4(filename: String) : AbstractDay(filename) {
     override fun part2(): Int {
         val mandatoryFields = setOf("hcl", "ecl", "pid", "eyr", "byr", "iyr", "hgt")
         val regexRules = part2Ruleset
-        val reader = PassportReader(input)
+        val reader = PassportReader(emptyLineSeparatedStrings())
         val verifier: PassportVerifier = PassportVerifierImpl()
         verifier.mandatoryFields = mandatoryFields
         verifier.fieldRegexRules = regexRules
@@ -29,7 +29,7 @@ class Day4(filename: String) : AbstractDay(filename) {
     fun part2Sample(): Int {
         val mandatoryFields = setOf("hcl", "ecl", "pid", "eyr", "byr", "iyr", "hgt")
         val regexRules = part2Ruleset
-        val reader = PassportReader(input)
+        val reader = PassportReader(emptyLineSeparatedStrings())
         val verifier: PassportVerifier = PassportVerifierImpl()
         verifier.mandatoryFields = mandatoryFields
         verifier.fieldRegexRules = regexRules

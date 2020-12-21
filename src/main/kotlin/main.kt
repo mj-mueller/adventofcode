@@ -12,4 +12,6 @@ fun main() {
     day4.printResults()
     val day5 = Day5(ResourcesRequester.DAY_INPUT_PATH + "day5.txt")
     day5.printResults()
+    val day6 = Day6(ResourcesRequester.DAY_INPUT_PATH + "day6.txt")
+    day6.printResults()
 }

@@ -7,7 +7,7 @@ internal class PassportReaderTest {
 
     @Test
     fun test_passportReader_readEmptyPassportFile_shouldBeZeroPassports() {
-        val input = ""
+        val input = emptyList<String>()
         val read = PassportReader(input)
 
         assertEquals(0, read.passports.size)
@@ -39,18 +39,17 @@ internal class PassportReaderTest {
             "eyr" to "2024",
             "hcl" to "#ae17e1"
         )
-        val input = """
-            iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
-            hcl:#cfa07d byr:1929
+        val input = listOf("""            iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
+            hcl:#cfa07d byr:1929""","""
 
             hcl:#ae17e1 iyr:2013
             eyr:2024
             ecl:brn pid:760753108 byr:1931
             hgt:179cm cid:324
-            
+            ""","""
             hcl:#ae17e1 iyr:2013
             eyr:2024
-        """.trimIndent()
+        """)
 
 
         val reader = PassportReader(input)
