@@ -1,6 +1,6 @@
 package days.utils
 
-import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.LogManager
 import java.net.URL
 
 class ResourcesRequester {

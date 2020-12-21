@@ -1,7 +1,4 @@
-import days.Day1
-import days.Day2
-import days.Day3
-import days.Day4
+import days.*
 import days.utils.ResourcesRequester
 
 fun main() {
@@ -13,4 +10,6 @@ fun main() {
     day3.printResults()
     val day4 = Day4(ResourcesRequester.DAY_INPUT_PATH + "day4.txt")
     day4.printResults()
+    val day5 = Day5(ResourcesRequester.DAY_INPUT_PATH + "day5.txt")
+    day5.printResults()
 }
