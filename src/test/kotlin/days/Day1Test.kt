@@ -12,4 +12,20 @@ internal class Day1Test {
         )
         assertEquals(514579, day1.part1())
     }
+
+    @Test
+    fun testPart1() {
+        val day1 = Day1(
+            ResourcesRequester.DAY_INPUT_PATH + "day1.txt"
+        )
+        assertEquals(927684, day1.part1())
+    }
+
+    @Test
+    fun testPart2() {
+        val day1 = Day1(
+            ResourcesRequester.DAY_INPUT_PATH + "day1.txt"
+        )
+        assertEquals(292093004, day1.part2())
+    }
 }

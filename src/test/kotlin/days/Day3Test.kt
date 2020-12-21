@@ -13,6 +13,19 @@ internal class Day3Test {
     }
 
     @Test
+    fun testPart1() {
+        val day3 = Day3(ResourcesRequester.DAY_INPUT_PATH + "day3.txt")
+
+        assertEquals(237, day3.part1())
+    }
+
+    @Test
+    fun testPart2() {
+        val day3 = Day3(ResourcesRequester.DAY_INPUT_PATH + "day3.txt")
+        assertEquals(2106818610, day3.part2())
+    }
+
+    @Test
     fun testSampleForPart2() {
         val day3 = Day3(ResourcesRequester.DAY_INPUT_PATH + "day3_sample.txt")
         val slope = Slope(day3.inputAsLines())

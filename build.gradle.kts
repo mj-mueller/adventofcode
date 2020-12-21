@@ -2,9 +2,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.4.21"
-    id("org.jetbrains.dokka") version "1.4.20"
     application
     idea
+    jacoco
+    id("org.jetbrains.dokka") version "1.4.20"
     id("io.snyk.gradle.plugin.snykplugin") version "0.4"
     id("com.dorongold.task-tree") version "1.5"
 }
@@ -49,6 +50,17 @@ idea {
 
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+    reports {
+        html.isEnabled = true
+        xml.isEnabled = false
+        csv.isEnabled = false
+        html.destination = file("${buildDir}/jacocoHtml")
+    }
 }
 
 tasks.withType<KotlinCompile> {
