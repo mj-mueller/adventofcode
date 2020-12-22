@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/mj-mueller/adventofcode.svg?branch=main)](https://travis-ci.com/mj-mueller/adventofcode) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.com/mj-mueller/adventofcode.svg?branch=main)](https://travis-ci.com/mj-mueller/adventofcode) [![Coverage Status](https://coveralls.io/repos/github/mj-mueller/adventofcode/badge.svg?branch=main)](https://coveralls.io/github/mj-mueller/adventofcode?branch=main) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # Advent of Code 2020
 
