@@ -2,8 +2,8 @@
 
 # Advent of Code 2020
 
-The aim is to solve the [GitHub Advent of Code 2020](https://adventofcode.com) code challenges while
-trying out concepts and features such as TDD, CI (travis), tags, clean code methods amd more.
+The aim is to solve the [GitHub Advent of Code 2020](https://adventofcode.com) code challenges while trying out concepts
+and features such as TDD, CI (travis), tags, clean code methods amd more.
 
 ## Usage
 

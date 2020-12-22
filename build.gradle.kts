@@ -38,7 +38,6 @@ buildscript {
 }
 
 dependencies {
-    implementation("org.apache.logging.log4j:log4j-api-kotlin:1.0.0")
     implementation("org.apache.logging.log4j:log4j-api:$log4jVersion")
     implementation("org.apache.logging.log4j:log4j-core:$log4jVersion")
     implementation("org.junit.jupiter:junit-jupiter:$jUnitVersion")
