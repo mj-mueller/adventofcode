@@ -1,9 +1,9 @@
 package com.muellermoritz.days.day4
 
-import com.muellermoritz.utils.logging.Logging
+import mu.KotlinLogging
 
-
-class PassportVerifierImpl : PassportVerifier, Logging {
+private val logger = KotlinLogging.logger {}
+class PassportVerifierImpl : PassportVerifier {
     override var mandatoryFields: Set<String> = emptySet()
     override var fieldRegexRules: Map<String, Regex> = emptyMap()
 
@@ -22,7 +22,7 @@ class PassportVerifierImpl : PassportVerifier, Logging {
                     fieldRegexRules[fieldName]!!
                 )
             ) {
-                log.debug("Invalid $fieldName.")
+                logger.debug("Invalid $fieldName.")
                 return false
             }
 
@@ -32,7 +32,7 @@ class PassportVerifierImpl : PassportVerifier, Logging {
 
     private fun testPassportField(value: String, rule: Regex): Boolean {
         val matching = (rule.find(value) != null)
-        log.trace("Matching $value on $rule. Result: $matching.")
+        logger.trace("Matching $value on $rule. Result: $matching.")
         return matching
     }
 }

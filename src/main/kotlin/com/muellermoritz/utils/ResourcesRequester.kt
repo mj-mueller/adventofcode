@@ -1,12 +1,12 @@
 package com.muellermoritz.utils
 
-import org.apache.logging.log4j.LogManager
 import java.net.URL
+import mu.KotlinLogging
 
+private val logger = KotlinLogging.logger {}
 class ResourcesRequester {
     companion object {
         const val DAY_INPUT_PATH = "/input/"
-        private val logger = LogManager.getLogger(ResourcesRequester::class.java.name)
         fun getResource(filename: String): URL {
             val resource: URL? = ResourcesRequester::class.java.getResource(filename)
             if (resource == null) {

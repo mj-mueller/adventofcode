@@ -1,10 +1,10 @@
 package com.muellermoritz.days
 
 import com.muellermoritz.utils.ResourcesRequester
-import com.muellermoritz.utils.logging.Logging
+import mu.KotlinLogging
 
-
-abstract class AbstractDay(filename: String) : Logging {
+private val logger = KotlinLogging.logger {}
+abstract class AbstractDay(filename: String)  {
     val emptyLineSeparatorRegex: Regex = """
         (?<=^|\n\n) # Lookbehind for start of string or empty line
         (.+?) # Lazy match passport key value pairs
@@ -25,8 +25,8 @@ abstract class AbstractDay(filename: String) : Logging {
     fun inputAsIntLines(): List<Int> = input.lines().map { it.toInt() }
 
     fun printResults() {
-        log.info("${this.javaClass.simpleName} part1: ${part1()}")
-        log.info("${this.javaClass.simpleName} part2: ${part2()}")
+        logger.info("${this.javaClass.simpleName} part1: ${part1()}")
+        logger.info("${this.javaClass.simpleName} part2: ${part2()}")
     }
 
     abstract fun part1(): Int

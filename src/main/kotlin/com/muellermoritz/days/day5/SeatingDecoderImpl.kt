@@ -1,8 +1,8 @@
 package com.muellermoritz.days.day5
+import mu.KotlinLogging
 
-import com.muellermoritz.utils.logging.Logging
-
-class SeatingDecoderImpl : SeatingDecoder, Logging {
+private val logger = KotlinLogging.logger {}
+class SeatingDecoderImpl : SeatingDecoder {
 
     override fun getSeat(seatCode: String): Seat {
         val match = validateSeatCode(seatCode)
@@ -27,7 +27,7 @@ class SeatingDecoderImpl : SeatingDecoder, Logging {
                         "Traversed whole code $code and result is not distinct" +
                                 " (min${minMax.first}:max${minMax.second})!"
                     )
-                log.error("Error during divide and conquer algorithm", e)
+                logger.error("Error during divide and conquer algorithm", e)
             }
             return minMax.first
         } else {

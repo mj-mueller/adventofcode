@@ -1,8 +1,9 @@
 package com.muellermoritz.days.day3
 
-import com.muellermoritz.utils.logging.Logging
+import mu.KotlinLogging
 
-class Slope(private val grid: List<String>) : Logging {
+private val logger = KotlinLogging.logger {}
+class Slope(private val grid: List<String>) {
     val height: Int = grid.size
     val width: Int
 
@@ -17,8 +18,8 @@ class Slope(private val grid: List<String>) : Logging {
                 }
             }
         }
-        log.info("Grid (width:$width, height:$height) created.")
-        log.debug(this)
+        logger.info("Grid (width:$width, height:$height) created.")
+        logger.debug{this}
     }
 
 
@@ -35,7 +36,7 @@ class Slope(private val grid: List<String>) : Logging {
         var rowIndex = 0
         var columnIndex = 0
 
-        log.trace("Sliding track (horizontal: $horizontalMovement, vertical: $verticalMovement): $this")
+        logger.trace("Sliding track (horizontal: $horizontalMovement, vertical: $verticalMovement): $this")
         while (rowIndex < this.height - 1) {
             columnIndex = (columnIndex + horizontalMovement) % this.width
             rowIndex += verticalMovement
@@ -45,10 +46,10 @@ class Slope(private val grid: List<String>) : Logging {
             check(columnIndex < this.width) {
                 "New columnIndex=$columnIndex is bigger than the $width of the grid."
             }
-            log.trace("Slope sliding position (rowIndex:$rowIndex, columnIndex:$columnIndex).")
+            logger.trace("Slope sliding position (rowIndex:$rowIndex, columnIndex:$columnIndex).")
             if (isTree(rowIndex, columnIndex)) {
                 ++treesHit
-                log.trace("Found tree at rowIndex:$rowIndex columnIndex:$columnIndex. $treesHit trees so far!")
+                logger.trace("Found tree at rowIndex:$rowIndex columnIndex:$columnIndex. $treesHit trees so far!")
             }
         }
 
