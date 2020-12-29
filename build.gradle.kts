@@ -4,9 +4,9 @@ plugins {
     application
 
     // Spring
-//    id("org.jetbrains.kotlin.plugin.spring")
-//    id("org.springframework.boot")
-//    id("io.spring.dependency-management")
+    id("org.jetbrains.kotlin.plugin.spring")
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
 
     // Misc
     idea
@@ -64,10 +64,14 @@ buildscript {
 }
 
 dependencies {
+    // Logging
+    configurations.all {
+        // Exclude this because springs logback would conflict with log4j+slf4j
+        exclude("org.springframework.boot", "spring-boot-starter-logging")
+    }
     implementation("org.apache.logging.log4j:log4j-api:$log4JVersion")
     implementation("org.apache.logging.log4j:log4j-core:$log4JVersion")
     implementation("org.apache.logging.log4j:log4j-slf4j-impl:$log4JVersion")
-
     implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
 
     implementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
@@ -76,15 +80,14 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonModuleKotlinVersion")
 
-// Spring Boot
-//    implementation("org.springframework.boot:spring-boot-starter")
-//    implementation("org.springframework.boot:spring-boot-starter-web")
-//    implementation("org.springframework.boot:spring-boot-starter-freemarker:$springBootFreemarker")
-//    developmentOnly ("org.springframework.boot:spring-boot-devtools")
-//    testImplementation("org.springframework.boot:spring-boot-starter-test")
-//    {
-//        exclude ("org.junit.vintage:junit-vintage-engine")
-//    }
+    // Spring Boot
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-freemarker")
+    implementation("org.springframework.boot:spring-boot-devtools")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    {
+        exclude("org.junit.vintage:junit-vintage-engine")
+    }
 }
 
 // Configurations ***************************************************************
@@ -138,6 +141,8 @@ tasks.jacocoTestReport {
         csv.isEnabled = false
         html.destination = file("${buildDir}/jacocoHtml")
     }
+    executionData(tasks.run.get())
+    sourceSets(sourceSets.main.get())
 }
 
 tasks.test {
