@@ -3,7 +3,7 @@ build/
 .idea/
 logs/
 gradle/
-app.log
+*.log
 **/log4j2.xml
 *.iml
 *.ipr

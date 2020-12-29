@@ -1,0 +1,28 @@
+# LFS
+# src/main/resources/input/** filter=lfs diff=lfs merge=lfs -text
+src/main/resources/input/** filter=lfs diff=lfs merge=lfs
+src/test/resources/input/** filter=lfs diff=lfs merge=lfs
+
+# Detect text files and perform normalization
+* text=auto
+
+# Kotlin sources
+*.gradle.kts    text diff=java
+
+*.pdf diff=astextplain
+*.PDF diff=astextplain
+
+*.css           text diff=css
+*.htm           text diff=html
+*.html          text diff=html
+*.js            text
+*.properties    text
+*.xml           text
+
+# Don't touch
+*.class         binary
+*.dll           binary
+*.ear           binary
+*.jar           binary
+*.so            binary
+*.war           binary
