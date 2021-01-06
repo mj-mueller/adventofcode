@@ -1,8 +1,10 @@
 package com.muellermoritz.days.day3
 
 import mu.KotlinLogging
+import org.springframework.stereotype.Component
 
 private val logger = KotlinLogging.logger {}
+@Component
 class Slope(private val grid: List<String>) {
     val height: Int = grid.size
     val width: Int

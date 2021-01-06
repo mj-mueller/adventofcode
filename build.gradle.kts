@@ -17,6 +17,8 @@ plugins {
     // For code coverage transmit from Travis
     id("com.github.nbaztec.coveralls-jacoco")
     id("org.sonarqube")
+
+//    id("io.swagger.core.v3.swagger-gradle-plugin")
 }
 
 
@@ -80,6 +82,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonModuleKotlinVersion")
 
+    // REST API
+    implementation("io.springfox:springfox-swagger-ui:3.0.0")
+    implementation("io.springfox:springfox-swagger2:3.0.0")
+
     // Spring Boot
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-freemarker")
@@ -126,6 +132,15 @@ snyk {
     setApi(snykAPITokenFromProperty ?: snykAPITokenFromEnv)
     setSeverity("low")
 }
+
+//resolve {
+//    outputFileName = "PetStoreAPI"
+//    outputFormat = "JSON"
+//    prettyPrint = "TRUE"
+//    classpath = sourceSets.main.runtimeClasspath
+//    resourcePackages = ["io.test"]
+//    outputDir = file("test")
+//}
 
 // Task Configurations ***************************************************************
 

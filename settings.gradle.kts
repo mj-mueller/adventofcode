@@ -8,6 +8,7 @@ pluginManagement {
     val gradlePluginTaskTree: String by settings
     val gradlePluginCoveralls: String by settings
     val gradlePluginSonarQube: String by settings
+    val gradlePluginSwagger: String by settings
 
     plugins {
         id("org.jetbrains.kotlin.jvm").version(kotlinVersion)
@@ -19,8 +20,13 @@ pluginManagement {
         id("com.dorongold.task-tree").version(gradlePluginTaskTree)
         id("com.github.nbaztec.coveralls-jacoco").version(gradlePluginCoveralls)
         id("org.sonarqube").version(gradlePluginSonarQube)
+        id("io.swagger.core.v3.swagger-gradle-plugin").version(gradlePluginSwagger)
     }
 }
 
 val pName: String by settings
 rootProject.name = pName
+
+//include("lib")
+include("spring")
+//include("App")

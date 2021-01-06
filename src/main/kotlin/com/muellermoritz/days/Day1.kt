@@ -1,8 +1,11 @@
 package com.muellermoritz.days
 
-class Day1(filename: String) : AbstractDay(filename) {
+import com.muellermoritz.days.utils.InputUtils.Companion.inputAsIntLines
+
+
+class Day1(private val text: String) : DayInterface {
     override fun part1(): Int {
-        val lines = inputAsIntLines()
+        val lines = inputAsIntLines(text)
         for (number1 in lines)
             for (number2 in lines)
                 if (number1 + number2 == 2020)
@@ -11,7 +14,7 @@ class Day1(filename: String) : AbstractDay(filename) {
     }
 
     override fun part2(): Int {
-        val lines = inputAsIntLines()
+        val lines = inputAsIntLines(text)
         for (number1 in lines)
             for (number2 in lines)
                 for (number3 in lines)

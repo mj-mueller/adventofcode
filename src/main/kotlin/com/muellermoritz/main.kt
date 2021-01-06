@@ -1,9 +1,10 @@
 import com.muellermoritz.days.*
 import com.muellermoritz.utils.ResourcesRequester
+import com.muellermoritz.utils.ResourcesRequester.Companion.getInputFileAsText
 
 fun main() {
-    val day1 = Day1(ResourcesRequester.DAY_INPUT_PATH + "day1.txt")
-    day1.printResults()
+    val day1 = Day1(getInputFileAsText("day1.txt"))
+    println(day1.getResults())
     val day2 = Day2(ResourcesRequester.DAY_INPUT_PATH + "day2.txt")
     day2.printResults()
     val day3 = Day3(ResourcesRequester.DAY_INPUT_PATH + "day3.txt")

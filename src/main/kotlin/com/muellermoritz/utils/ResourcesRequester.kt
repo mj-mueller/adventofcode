@@ -1,9 +1,10 @@
 package com.muellermoritz.utils
 
-import java.net.URL
 import mu.KotlinLogging
+import java.net.URL
 
 private val logger = KotlinLogging.logger {}
+
 class ResourcesRequester {
     companion object {
         const val DAY_INPUT_PATH = "/input/"
@@ -16,5 +17,13 @@ class ResourcesRequester {
             }
             return resource
         }
-    }
+
+//      private  fun getResourcePath(filename: String): URL =
+//          getResource(DAY_INPUT_PATH + filename)
+//    }
+
+
+    fun getInputFileAsText(filename: String) = getResource(DAY_INPUT_PATH + filename).readText()
+
+}
 }
