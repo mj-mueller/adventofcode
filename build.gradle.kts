@@ -1,129 +1,148 @@
 plugins {
-    // Kotlin
-    id("org.jetbrains.kotlin.jvm")
+    kotlin("jvm").version("1.4.21") apply false
+    jacoco
     application
+    idea
+
+    id("com.dorongold.task-tree").version("1.5")
 
     // Spring
-    id("org.jetbrains.kotlin.plugin.spring")
-    id("org.springframework.boot")
-    id("io.spring.dependency-management")
+    id("org.jetbrains.kotlin.plugin.spring").version("1.4.30-M1") apply false
+    id("org.springframework.boot").version("2.4.1") apply false
+    id("io.spring.dependency-management").version("1.0.10.RELEASE") apply false
 
     // Misc
-    idea
-    jacoco
-    id("org.jetbrains.dokka")
-    id("io.snyk.gradle.plugin.snykplugin")
-    id("com.dorongold.task-tree")
-    // For code coverage transmit from Travis
-    id("com.github.nbaztec.coveralls-jacoco")
-    id("org.sonarqube")
-
-//    id("io.swagger.core.v3.swagger-gradle-plugin")
+    id("io.snyk.gradle.plugin.snykplugin").version("0.4")
+    id("com.github.nbaztec.coveralls-jacoco").version("1.2.4")
+    id("org.sonarqube").version("3.0")
+    id("org.jetbrains.dokka").version("1.4.20")
+    id("io.swagger.core.v3.swagger-gradle-plugin").version("2.1.6") apply false
+    id("com.github.johnrengelman.processes").version("0.5.0") apply false
+    id("org.springdoc.openapi-gradle-plugin").version("1.3.0") apply false
 }
 
-
-val pDescription: String by project
-val pGroup: String by project
-val pVersion: String by project
-val javaLanguageLevel: String by project
-val gradleWrapperVersion: String by project
-val gradleDistributionVersion: String by project
-
-val springBootFreemarker: String by project
-val log4JVersion: String by project
-val junitJupiterVersion: String by project
-val kotlinLoggingVersion: String by project
-val jacksonModuleKotlinVersion: String by project
-
-
-// Load API token from user folder. Fallback to env for travis. There should be a combined way for this.
-val snykAPITokenFromProperty: String? by project
-val snykAPITokenFromEnv: String? = System.getenv("SNYK_API_TOKEN")
-val sonarToken: String by project
-val sonarDockerContainerImageName: String by project
-val sonarDockerContainerPortMapping: String by project
-val sonarDockerContainerName: String by project
-val JUnitMaxParallelForks: String by project
-
-
-
-description = pDescription
-group = pGroup
-version = pVersion
-
+description =
+    "The aim is to solve the GitHub Advent of Code 2020 code challenges while trying out concepts and features such as TDD, CI (travis), tags, clean code methods amd more."
+version = "0.5-SNAPSHOT"
 
 repositories {
+    google() // For coveralls
     mavenCentral()
     jcenter()
 }
 
 buildscript {
     repositories {
-        google()
+        google() // For coveralls
         mavenCentral()
         jcenter()
     }
 }
 
-dependencies {
-    // Logging
-    configurations.all {
-        // Exclude this because springs logback would conflict with log4j+slf4j
-        exclude("org.springframework.boot", "spring-boot-starter-logging")
+allprojects {
+    group = "com.muellermoritz"
+
+    tasks.withType<JavaCompile> {
+        sourceCompatibility = "1.8"
+        targetCompatibility = "1.8"
     }
-    implementation("org.apache.logging.log4j:log4j-api:$log4JVersion")
-    implementation("org.apache.logging.log4j:log4j-core:$log4JVersion")
-    implementation("org.apache.logging.log4j:log4j-slf4j-impl:$log4JVersion")
-    implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
 
-    implementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
-
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonModuleKotlinVersion")
-
-    // REST API
-    implementation("io.springfox:springfox-swagger-ui:3.0.0")
-    implementation("io.springfox:springfox-swagger2:3.0.0")
-
-    // Spring Boot
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-freemarker")
-    implementation("org.springframework.boot:spring-boot-devtools")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    {
-        exclude("org.junit.vintage:junit-vintage-engine")
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = "1.8"
+        }
     }
 }
 
+subprojects {
+    apply {
+        plugin("org.jetbrains.kotlin.jvm")
+        plugin("jacoco")
+        plugin("idea")
+        plugin("org.jetbrains.dokka")
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+
+        ext {
+            set("log4JVersion", "2.14.0")
+            set("kotlinLoggingVersion", "1.12.0")
+            set("junitJupiterVersion", "5.7.0")
+            set("micrometerRegistry", "latest.release")
+            set("swaggerVersion", "3.0.0")
+            set("springBootVersion", "2.4.1")
+            set("micrometerCoreVersion", "1.6.2")
+        }
+        val log4JVersion: String by ext
+        val kotlinLoggingVersion: String by ext
+        val junitJupiterVersion: String by ext
+
+        implementation("org.apache.logging.log4j:log4j-api:$log4JVersion")
+        implementation("org.apache.logging.log4j:log4j-core:$log4JVersion")
+        implementation("org.apache.logging.log4j:log4j-slf4j-impl:$log4JVersion")
+        implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
+
+        implementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
+    }
+
+    idea {
+        module {
+            // Download sources and javadoc
+            isDownloadJavadoc = true
+            isDownloadSources = true
+            excludeDirs = setOf(".gradle", ".idea", "build").map { file(it) }.toSet()
+        }
+    }
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
+        testLogging {
+            events("passed", "skipped", "failed")
+            exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        }
+        maxParallelForks = 4
+        ignoreFailures = true
+        finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+    }
+
+
+    tasks.jacocoTestReport {
+        reports {
+            html.isEnabled = true
+            xml.isEnabled = true
+            csv.isEnabled = false
+            html.destination = file("${buildDir}/jacocoHtml")
+        }
+    }
+//    jacoco {
+//        applyTo(tasks.run.get())
+//    }
+//
+//    tasks.register<JacocoReport>("applicationCodeCoverageReport") {
+//        executionData(tasks.run.get())
+//        sourceSets(sourceSets.main.get())
+//    }
+}
+
 // Configurations ***************************************************************
+
+// Load API token from user folder. Fallback to env for travis. There should be a combined way for this.
+val snykAPITokenFromProperty: String? by project
+val snykAPITokenFromEnv: String? = System.getenv("SNYK_API_TOKEN")
+val sonarToken: String by project
+val sonarDockerContainerImageName = "sonarqube:latest"
+val sonarDockerContainerPortMapping = "9000:9000"
+val sonarDockerContainerName = "sonarqube"
 
 sonarqube {
     properties {
         property("sonar.login", sonarToken)
     }
-}
-
-idea {
-    module {
-        // Download sources and javadoc
-        isDownloadJavadoc = true
-        isDownloadSources = true
-        excludeDirs = setOf(".gradle", ".idea", "build").map { file(it) }.toSet()
-    }
-}
-
-application {
-    mainClass.set("MainKt")
-}
-
-tasks.withType<Test>().all {
-    testLogging {
-        events("passed", "skipped", "failed")
-        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
-    }
-    maxParallelForks = JUnitMaxParallelForks.toInt()
-    ignoreFailures = true
 }
 
 snyk {
@@ -133,49 +152,15 @@ snyk {
     setSeverity("low")
 }
 
-//resolve {
-//    outputFileName = "PetStoreAPI"
-//    outputFormat = "JSON"
-//    prettyPrint = "TRUE"
-//    classpath = sourceSets.main.runtimeClasspath
-//    resourcePackages = ["io.test"]
-//    outputDir = file("test")
-//}
-
-// Task Configurations ***************************************************************
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
-}
-
-tasks.jacocoTestReport {
-    dependsOn(tasks.test) // tests are required to run before generating the report
-    reports {
-        html.isEnabled = true
-        xml.isEnabled = true
-        csv.isEnabled = false
-        html.destination = file("${buildDir}/jacocoHtml")
-    }
-    executionData(tasks.run.get())
-    sourceSets(sourceSets.main.get())
-}
-
-tasks.test {
-    useJUnitPlatform()
-    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
-}
-
-tasks.wrapper {
-    description = "Generates gradlew[.bat] scripts"
-    gradleVersion = gradleWrapperVersion
-    distributionType = if (gradleDistributionVersion.equals("all")) {
-        org.gradle.api.tasks.wrapper.Wrapper.DistributionType.ALL
-    } else {
-        org.gradle.api.tasks.wrapper.Wrapper.DistributionType.BIN
-    }
-}
-
 // Custom tasks ***************************************************************
+//tasks.register<Delete>("deleteAllLogs")
+//{
+//
+//    delete(fileTree("dir/foo")) {
+//        include(""**/*.ext")
+//    }
+//}
+//}
 
 tasks.register<Exec>("deleteSonarDocker") {
     dependsOn(":stopSonarDocker")

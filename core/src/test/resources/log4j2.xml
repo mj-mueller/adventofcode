@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [TEST-CORE] [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <File name="LogFile" fileName="core.log">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [TEST-CORE] [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+        </File>
+        <Async name="Async">
+            <AppenderRef ref="LogFile"/>
+        </Async>
+
+    </Appenders>
+    <Loggers>
+        <Root level="off">
+            <AppenderRef ref="Console"/>
+            <!--            <AppenderRef ref="LogFile"/>-->
+        </Root>
+    </Loggers>
+</Configuration>
