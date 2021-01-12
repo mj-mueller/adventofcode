@@ -3,22 +3,24 @@ package com.muellermoritz.days
 import com.muellermoritz.days.day4.PassportReader
 import com.muellermoritz.days.day4.PassportVerifier
 import com.muellermoritz.days.day4.PassportVerifierImpl
+import com.muellermoritz.days.utils.InputUtils.Companion.emptyLineSeparatedStrings
 
-class Day4(filename: String) : AbstractDay(filename) {
+class Day4(val text: String) : DayInterface {
+    override val dayLabel="day4"
 
-    override fun part1(): Int {
+    override fun part1Impl(): Int {
         val mandatoryFields = setOf("hcl", "ecl", "pid", "eyr", "byr", "iyr", "hgt")
-        val reader = PassportReader(emptyLineSeparatedStrings())
+        val reader = PassportReader(emptyLineSeparatedStrings(text))
         val verifier: PassportVerifier = PassportVerifierImpl()
         verifier.mandatoryFields = mandatoryFields
 
         return reader.passports.filter { verifier.checkPassport(it) }.count()
     }
 
-    override fun part2(): Int {
+    override fun part2Impl(): Int {
         val mandatoryFields = setOf("hcl", "ecl", "pid", "eyr", "byr", "iyr", "hgt")
         val regexRules = part2Ruleset
-        val reader = PassportReader(emptyLineSeparatedStrings())
+        val reader = PassportReader(emptyLineSeparatedStrings(text))
         val verifier: PassportVerifier = PassportVerifierImpl()
         verifier.mandatoryFields = mandatoryFields
         verifier.fieldRegexRules = regexRules
@@ -29,7 +31,7 @@ class Day4(filename: String) : AbstractDay(filename) {
     fun part2Sample(): Int {
         val mandatoryFields = setOf("hcl", "ecl", "pid", "eyr", "byr", "iyr", "hgt")
         val regexRules = part2Ruleset
-        val reader = PassportReader(emptyLineSeparatedStrings())
+        val reader = PassportReader(emptyLineSeparatedStrings(text))
         val verifier: PassportVerifier = PassportVerifierImpl()
         verifier.mandatoryFields = mandatoryFields
         verifier.fieldRegexRules = regexRules

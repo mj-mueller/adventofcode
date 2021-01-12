@@ -3,22 +3,25 @@ package com.muellermoritz.days
 import com.muellermoritz.days.day5.Seat
 import com.muellermoritz.days.day5.SeatingDecoder
 import com.muellermoritz.days.day5.SeatingDecoderImpl
+import com.muellermoritz.days.utils.InputUtils.Companion.inputAsLines
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
-class Day5(filename: String) : AbstractDay(filename) {
+class Day5(val text: String) : DayInterface {
+    override val dayLabel="day5"
 
-    override fun part1(): Int {
+    override fun part1Impl(): Int {
         val decoder: SeatingDecoder = SeatingDecoderImpl()
-        return inputAsLines().map { decoder.getSeat(it).id }.maxOrNull()
+        return inputAsLines(text).map { decoder.getSeat(it).id }.maxOrNull()
             ?: throw IllegalStateException("Something went wrong..")
     }
 
 
-    override fun part2(): Int {
+    override fun part2Impl(): Int {
         val decoder: SeatingDecoder = SeatingDecoderImpl()
-        val rowMap: Map<Int, List<Seat>> = inputAsLines().map { decoder.getSeat(it) }.groupBy { it.row }.toSortedMap()
+        val rowMap: Map<Int, List<Seat>> =
+            inputAsLines(text).map { decoder.getSeat(it) }.groupBy { it.row }.toSortedMap()
         logger.debug("Map of seats:$rowMap")
         return findFirstMissingSeatFromCenter2(rowMap, 0)!!.id
     }

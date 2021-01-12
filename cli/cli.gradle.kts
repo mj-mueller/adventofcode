@@ -8,14 +8,6 @@ version = "1.0-SNAPSHOT"
 
 dependencies {
     implementation(project(":aoc-core"))
-
-    val micrometerRegistry: String by ext
-
-    implementation("io.micrometer:micrometer-registry-graphite:$micrometerRegistry")
-    implementation("io.micrometer:micrometer-registry-prometheus:$micrometerRegistry")
-    implementation("io.prometheus:simpleclient_httpserver:0.9.0")
-    implementation("io.prometheus:simpleclient_hotspot:0.9.0")
-    implementation("io.prometheus:simpleclient:0.9.0")
 }
 
 // Configurations ***************************************************************
