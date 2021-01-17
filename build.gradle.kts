@@ -13,7 +13,6 @@ plugins {
 
     // Misc
     id("io.snyk.gradle.plugin.snykplugin").version("0.4")
-    id("com.github.nbaztec.coveralls-jacoco").version("1.2.4")
     id("org.sonarqube").version("3.0")
     id("org.jetbrains.dokka").version("1.4.20")
     id("io.swagger.core.v3.swagger-gradle-plugin").version("2.1.6") apply false
@@ -26,17 +25,8 @@ description =
 version = "0.5-SNAPSHOT"
 
 repositories {
-    google() // For coveralls
     mavenCentral()
     jcenter()
-}
-
-buildscript {
-    repositories {
-        google() // For coveralls
-        mavenCentral()
-        jcenter()
-    }
 }
 
 allprojects {

@@ -12,4 +12,6 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
-  ./gradlew check jacocoTestReport coverallsJacoco --info --stacktrace --console=plain --max-workers=1 --no-daemon --build-cache -Dkotlin.colors.enabled=false
+  ./gradlew check jacocoTestReport --info --stacktrace --console=plain --max-workers=1 --no-daemon --build-cache -Dkotlin.colors.enabled=false
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
