@@ -1,5 +1,5 @@
 plugins {
-    `java-library`
+    id("aoc.kotlin-library-conventions")
 }
 
 description = "Core module for advent of code 2020 project."

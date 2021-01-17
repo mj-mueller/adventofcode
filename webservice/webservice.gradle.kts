@@ -1,15 +1,5 @@
 plugins {
-    application
-    // Spring
-    kotlin("plugin.spring")
-    id("org.springframework.boot")
-    id("io.spring.dependency-management")
-
-    // Swagger
-    id("io.swagger.core.v3.swagger-gradle-plugin")
-
-//    id("com.github.johnrengelman.processes") version "0.5.0"
-//    id("org.springdoc.openapi-gradle-plugin") version "1.3.0"
+    id("aoc.kotlin-webservice-conventions")
 }
 
 description = "Webservice for advent of code 2020 project."
