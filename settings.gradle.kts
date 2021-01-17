@@ -1,7 +1,7 @@
 rootProject.name = "Advent_of_Code_2020"
 
 // Submodules
-include("core", "cli", "webservice")
+include("core", "cli", "webservice","grid")
 
 rootProject.children.forEach {project ->
     project.buildFileName = "${project.name}.gradle.kts"
@@ -9,3 +9,4 @@ rootProject.children.forEach {project ->
 project(":core").name = "aoc-core"
 project(":cli").name = "aoc-cli"
 project(":webservice").name = "aoc-ws"
+project(":grid").name = "aoc-grid"
